@@ -16,7 +16,7 @@ in Go with pluggable metric collectors.}
                         CONTRIBUTING.md MAINTAINERS.md SECURITY.md README.md
 
 Name:           %{goname}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Exporter for machine metrics
 
 # Upstream license specification: Apache-2.0
@@ -68,8 +68,8 @@ export BUILDTAGS="netgo osusergo static_build"
 
 %install
 %gopkginstall
-install -m 0755 -vd                     %{buildroot}%{_bindir}
-install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_bindir}/
+install -m 0755 -vd                     %{buildroot}%{_sbindir}
+install -m 0755 -vp %{gobuilddir}/bin/* %{buildroot}%{_sbindir}/
 install -m 0755 -vd                     %{buildroot}%{_sysusersdir}
 install -m 0644 -vp %{SOURCE1}          %{buildroot}%{_sysusersdir}/
 install -m 0755 -vd                                           %{buildroot}%{_sysconfdir}
@@ -104,7 +104,7 @@ mkdir -p %{buildroot}%{_sharedstatedir}/node_exporter/textfile_collector
 %license LICENSE NOTICE
 %doc docs examples CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md
 %doc MAINTAINERS.md SECURITY.md README.md
-%{_bindir}/*
+%{_sbindir}/*
 %config(noreplace) %{_sysconfdir}/sysconfig/node_exporter
 %config(noreplace) %{_sysconfdir}/systemd/system/node_exporter.service
 %{_sysusersdir}/node_exporter.conf
@@ -113,5 +113,8 @@ mkdir -p %{buildroot}%{_sharedstatedir}/node_exporter/textfile_collector
 %gopkgfiles
 
 %changelog
+* Sun Mar 28 18:14:35 CEST 2021 Robert-André Mauchin <zebob.m@gmail.com> - 1.1.1-2
+- Fix binary location
+
 * Wed Feb 17 22:48:22 CET 2021 Robert-André Mauchin <zebob.m@gmail.com> - 1.1.1-1
 - Initial package
