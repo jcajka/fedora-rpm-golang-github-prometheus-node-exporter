@@ -3,7 +3,7 @@
 
 # https://github.com/prometheus/node_exporter
 %global goipath         github.com/prometheus/node_exporter
-Version:                1.1.1
+Version:                1.2.2
 
 %gometa
 
@@ -29,14 +29,15 @@ BuildRequires:  systemd-rpm-macros
 BuildRequires:  golang(github.com/beevik/ntp)
 BuildRequires:  golang(github.com/coreos/go-systemd/dbus)
 BuildRequires:  golang(github.com/ema/qdisc)
-BuildRequires:  golang(github.com/go-kit/kit/log)
-BuildRequires:  golang(github.com/go-kit/kit/log/level)
+BuildRequires:  golang(github.com/go-kit/log)
+BuildRequires:  golang(github.com/go-kit/log/level)
 BuildRequires:  golang(github.com/godbus/dbus)
 BuildRequires:  golang(github.com/hodgesds/perf-utils)
 BuildRequires:  golang(github.com/jsimonetti/rtnetlink)
 BuildRequires:  golang(github.com/mattn/go-xmlrpc)
 BuildRequires:  golang(github.com/mdlayher/wifi)
 BuildRequires:  golang(github.com/prometheus/client_golang/prometheus)
+BuildRequires:  golang(github.com/prometheus/client_golang/prometheus/collectors)
 BuildRequires:  golang(github.com/prometheus/client_golang/prometheus/promhttp)
 BuildRequires:  golang(github.com/prometheus/client_model/go)
 BuildRequires:  golang(github.com/prometheus/common/expfmt)
@@ -50,6 +51,7 @@ BuildRequires:  golang(github.com/prometheus/procfs/btrfs)
 BuildRequires:  golang(github.com/prometheus/procfs/nfs)
 BuildRequires:  golang(github.com/prometheus/procfs/sysfs)
 BuildRequires:  golang(github.com/prometheus/procfs/xfs)
+BuildRequires:  golang(github.com/safchain/ethtool)
 BuildRequires:  golang(github.com/soundcloud/go-runit/runit)
 BuildRequires:  golang(golang.org/x/sys/unix)
 BuildRequires:  golang(gopkg.in/alecthomas/kingpin.v2)
