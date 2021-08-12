@@ -16,7 +16,7 @@ in Go with pluggable metric collectors.}
                         CONTRIBUTING.md MAINTAINERS.md SECURITY.md README.md
 
 Name:           %{goname}
-Release:        3%{?dist}
+Release:        %autorelease
 Summary:        Exporter for machine metrics
 
 # Upstream license specification: Apache-2.0
@@ -113,11 +113,4 @@ mkdir -p %{buildroot}%{_sharedstatedir}/node_exporter/textfile_collector
 %gopkgfiles
 
 %changelog
-* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 1.1.1-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
-
-* Sun Mar 28 18:14:35 CEST 2021 Robert-André Mauchin <zebob.m@gmail.com> - 1.1.1-2
-- Fix binary location
-
-* Wed Feb 17 22:48:22 CET 2021 Robert-André Mauchin <zebob.m@gmail.com> - 1.1.1-1
-- Initial package
+%autochangelog
