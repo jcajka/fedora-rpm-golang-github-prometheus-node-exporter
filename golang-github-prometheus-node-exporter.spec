@@ -135,7 +135,8 @@ sed -i '/^  /d; /^.SH "NAME"/,+1c.SH "NAME"\nprometheus-node-exporter \\- The Pr
 %{_unitdir}/%{shortname}.service
 %{_mandir}/man1/%{shortname}.1*
 %{_datadir}/prometheus/node-exporter/example-rules.yml
-%attr(0755,prometheus,prometheus) %{_sharedstatedir}/prometheus
+%dir %attr(0755,prometheus,prometheus) %{_sharedstatedir}/prometheus
+%dir %attr(0755,prometheus,prometheus) %{_sharedstatedir}/prometheus/node-exporter
 
 %gopkgfiles
 
