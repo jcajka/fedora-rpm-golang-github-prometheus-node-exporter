@@ -82,6 +82,10 @@ BuildRequires:  golang(github.com/prometheus/client_golang/prometheus/testutil)
 
 %build
 export BUILDTAGS="netgo osusergo static_build"
+LDFLAGS="-X github.com/prometheus/common/version.Version=%{version}  \
+         -X github.com/prometheus/common/version.Revision=%{release} \
+         -X github.com/prometheus/common/version.Branch=tarball      \
+         -X github.com/prometheus/common/version.BuildDate=$(date -u -d@$SOURCE_DATE_EPOCH +%%Y%%m%%d)"
 %gobuild -o %{gobuilddir}/bin/node_exporter %{goipath}
 
 %install
