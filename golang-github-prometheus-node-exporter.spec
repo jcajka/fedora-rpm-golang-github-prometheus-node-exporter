@@ -24,9 +24,10 @@ Summary:        Exporter for machine metrics
 License:        ASL 2.0 and MIT
 URL:            %{gourl}
 Source0:        %{gosource}
-Source1:        prometheus-node-exporter.sysusers
-Source2:        prometheus-node-exporter.service
-Source3:        prometheus-node-exporter.conf
+Source1:        %{shortname}.sysusers
+Source2:        %{shortname}.service
+Source3:        %{shortname}.conf
+Source4:        %{shortname}.logrotate
 # Replace defaults paths for config files
 Patch0:         defaults-paths.patch
 # https://github.com/prometheus/node_exporter/pull/2190
@@ -70,6 +71,8 @@ BuildRequires:  golang(gopkg.in/alecthomas/kingpin.v2)
 BuildRequires:  golang(github.com/prometheus/client_golang/prometheus/testutil)
 %endif
 
+Requires(pre): shadow-utils
+
 %description
 %{common_description}
 
@@ -97,12 +100,11 @@ pushd %{buildroot}%{_bindir}
 ln -s %{shortname} node_exporter
 popd
 
-install -dm750 %{buildroot}%{_sharedstatedir}/prometheus/node-exporter
-
 install -Dpm0644 %{S:1} %{buildroot}%{_sysusersdir}/%{shortname}.conf
 install -Dpm0644 %{S:2} %{buildroot}%{_unitdir}/%{shortname}.service
 install -Dpm0644 %{S:3} %{buildroot}%{_sysconfdir}/default/%{shortname}
 install -Dpm0644 example-rules.yml %{buildroot}%{_datadir}/prometheus/node-exporter/example-rules.yml
+install -Dpm0644 %{S:4} %{buildroot}%{_sysconfdir}/logrotate.d/%{shortname}
 mkdir -vp %{buildroot}%{_sharedstatedir}/prometheus/node-exporter
 
 # Build man pages.
@@ -135,6 +137,7 @@ sed -i '/^  /d; /^.SH "NAME"/,+1c.SH "NAME"\nprometheus-node-exporter \\- The Pr
 %doc MAINTAINERS.md SECURITY.md README.md
 %{_bindir}/*
 %config(noreplace) %{_sysconfdir}/default/%{shortname}
+%config(noreplace) %{_sysconfdir}/logrotate.d/%{shortname}
 %{_sysusersdir}/%{shortname}.conf
 %{_unitdir}/%{shortname}.service
 %{_mandir}/man1/%{shortname}.1*
