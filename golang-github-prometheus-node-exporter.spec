@@ -102,6 +102,9 @@ popd
 
 install -Dpm0644 %{S:1} %{buildroot}%{_sysusersdir}/%{shortname}.conf
 install -Dpm0644 %{S:2} %{buildroot}%{_unitdir}/%{shortname}.service
+pushd %{buildroot}%{_unitdir}
+ln -s %{shortname}.service node_exporter.service
+popd
 install -Dpm0644 %{S:3} %{buildroot}%{_sysconfdir}/default/%{shortname}
 install -Dpm0644 example-rules.yml %{buildroot}%{_datadir}/prometheus/node-exporter/example-rules.yml
 install -Dpm0644 %{S:4} %{buildroot}%{_sysconfdir}/logrotate.d/%{shortname}
@@ -140,6 +143,7 @@ sed -i '/^  /d; /^.SH "NAME"/,+1c.SH "NAME"\nprometheus-node-exporter \\- The Pr
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{shortname}
 %{_sysusersdir}/%{shortname}.conf
 %{_unitdir}/%{shortname}.service
+%{_unitdir}/node_exporter.service
 %{_mandir}/man1/%{shortname}.1*
 %{_datadir}/prometheus/node-exporter/example-rules.yml
 %dir %attr(0755,prometheus,prometheus) %{_sharedstatedir}/prometheus
