@@ -72,8 +72,10 @@ BuildRequires:  golang(gopkg.in/alecthomas/kingpin.v2)
 %endif
 
 %if %{with check}
+%if %{without bundled}
 # Tests
 BuildRequires:  golang(github.com/prometheus/client_golang/prometheus/testutil)
+%endif
 %endif
 
 Requires(pre): shadow-utils
@@ -86,7 +88,9 @@ Requires(pre): shadow-utils
 %prep
 %goprep
 %patch 0 -p1
+%if %{with bundled}
 /usr/lib/rpm/rpmuncompress -x %{SOURCE20}
+%endif
 
 %build
 LDFLAGS="-X github.com/prometheus/common/version.Version=%{version}  \
