@@ -19,7 +19,8 @@ in Go with pluggable metric collectors.}
                         CONTRIBUTING.md MAINTAINERS.md SECURITY.md README.md
 
 Name:           %{goname}
-Release:        %autorelease
+#autorelease seems to be broken in COPR
+Release:        3%{?dist}
 Summary:        Exporter for machine metrics
 
 # Upstream license specification: Apache-2.0
