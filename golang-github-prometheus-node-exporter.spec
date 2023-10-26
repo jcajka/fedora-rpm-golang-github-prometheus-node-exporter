@@ -33,6 +33,7 @@ Source4:        %{shortname}.logrotate
 Source20:       vendor-node_exporter-%{version}.tar.gz
 # Replace defaults paths for config files
 Patch0:         defaults-paths.patch
+Patch1:         summod.patch
 
 BuildRequires:  systemd-rpm-macros
 %if %{without bundled}
@@ -88,6 +89,7 @@ Requires(pre): shadow-utils
 %prep
 %goprep
 %patch 0 -p1
+%patch 1 -p1
 %if %{with bundled}
 /usr/lib/rpm/rpmuncompress -x %{SOURCE20}
 %endif
