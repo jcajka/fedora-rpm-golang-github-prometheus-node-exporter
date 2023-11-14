@@ -6,7 +6,7 @@
 
 # https://github.com/prometheus/node_exporter
 %global goipath         github.com/prometheus/node_exporter
-Version:                1.6.1
+Version:                1.7.0
 
 %gometa
 
@@ -20,7 +20,7 @@ in Go with pluggable metric collectors.}
 
 Name:           %{goname}
 #autorelease seems to be broken in COPR
-Release:        3%{?dist}
+Release:        1%{?dist}
 Summary:        Exporter for machine metrics
 
 # Upstream license specification: Apache-2.0
@@ -34,7 +34,6 @@ Source4:        %{shortname}.logrotate
 Source20:       vendor-node_exporter-%{version}.tar.gz
 # Replace defaults paths for config files
 Patch0:         defaults-paths.patch
-Patch1:         summod.patch
 
 BuildRequires:  systemd-rpm-macros
 %if %{without bundled}
@@ -90,7 +89,6 @@ Requires(pre): shadow-utils
 %prep
 %goprep
 %patch 0 -p1
-%patch 1 -p1
 %if %{with bundled}
 /usr/lib/rpm/rpmuncompress -x %{SOURCE20}
 %endif
